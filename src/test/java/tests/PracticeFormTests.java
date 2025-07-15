@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class practiceFormTests {
+public class PracticeFormTests {
 
     @BeforeAll
     static void basicBrowserSettings() {
@@ -20,7 +20,7 @@ public class practiceFormTests {
         //Configuration.timeout = 5000;
     }
     @Test
-    void practiceFormTests() {
+    void PracticeFormTests() {
         open("/automation-practice-form");
 
         //вводим имя
@@ -48,7 +48,7 @@ public class practiceFormTests {
         $$(".subjects-auto-complete__option").findBy(text("Computer Science")).click();
 
         //выбираем хобби спорт
-        $("label[for='hobbies-checkbox-1']").click();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
 
         //загружаем картинку
         $("#uploadPicture").uploadFromClasspath("photo.jpg");
