@@ -20,7 +20,7 @@ public class PracticeFormTests {
         //Configuration.timeout = 5000;
     }
     @Test
-    void PracticeFormTests() {
+    void practiceFormTests() {
         open("/automation-practice-form");
 
         //вводим имя
