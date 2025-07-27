@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class textBoxTests {
+public class TextBoxTests {
     @BeforeAll
     static void beforeAll(){
         Configuration.browserSize = "1920x1080";
