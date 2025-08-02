@@ -12,7 +12,7 @@ public class ResultsTable {
                 .shouldHave(text(value));
     }
 
-    public static void checkResultsTableForNegative(String key, String value) {
+    public static void checkResultsTableForNegative(String key) {
         $(".table-responsive").$(byText(key)).parent()
                 .shouldNotBe(exist);
     }

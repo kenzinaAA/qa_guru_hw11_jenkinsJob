@@ -3,10 +3,6 @@ package tests;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-
 public class PracticeFormWithPageObjectsTests extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -14,6 +10,7 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
     @Test
     void practiceFormAllFields() {
         practiceFormPage.openPage()
+                .removeBanners()
                 .setFirstName("Anastasiia")
                 .setLastName("Kenzina")
                 .setEmail("kenzina.aa@yandex.ru")
@@ -43,6 +40,7 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
     @Test
     void practiceFormMinFields() {
         practiceFormPage.openPage()
+                .removeBanners()
                 .setFirstName("Anastasiia")
                 .setLastName("Kenzina")
                 .setGender("Female")
@@ -57,12 +55,13 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
     @Test
     void practiceFormFailedTest() {
         practiceFormPage.openPage()
+                .removeBanners()
                 .setFirstName("Anastasiia")
                 .setLastName("Kenzina")
                 .setUserNumber("9025111826")
                 .submitForm();
-        practiceFormPage.checkResultForNegative("Student Name", "Anastasiia Kenzina")
-                .checkResultForNegative("Mobile", "9025111826");
+        practiceFormPage.checkResultForNegative("Student Name")
+                .checkResultForNegative("Mobile");
 
     }
 
