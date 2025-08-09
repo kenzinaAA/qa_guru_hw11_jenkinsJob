@@ -1,17 +1,38 @@
 package tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.Attach;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
+import static io.qameta.allure.Allure.step;
 
+@Tag("demoqa")
 public class PracticeFormWithPageObjectsTests extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
 
+    @AfterEach
+    void addAttachmets () {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+    }
+
     @Test
     void practiceFormAllFields() {
-        practiceFormPage.openPage()
-                .removeBanners()
-                .setFirstName("Anastasiia")
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        step("Открываем форму регистрации", () -> {
+            practiceFormPage.openPage();
+        });
+        step("Закрываем банеры, если всплыли", () -> {
+                    practiceFormPage.removeBanners();
+                });
+        step("Заполняем все поля формы и отправляем", () -> {
+            practiceFormPage.setFirstName("Anastasiia")
                 .setLastName("Kenzina")
                 .setEmail("kenzina.aa@yandex.ru")
                 .setGender("Female")
@@ -24,45 +45,63 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
                 .setState("NCR")
                 .setCity("Delhi")
                 .submitForm();
-        practiceFormPage.checkResult("Student Name", "Anastasiia Kenzina")
-                .checkResult("Student Email", "kenzina.aa@yandex.ru")
-                .checkResult("Gender", "Female")
-                .checkResult("Mobile", "9025111826")
-                .checkResult("Date of Birth", "18 October,1994")
-                .checkResult("Subjects", "Math")
-                .checkResult("Hobbies", "Sports")
-                .checkResult("Picture", "photo.jpg")
-                .checkResult("Address", "Some address 1")
-                .checkResult("State and City", "NCR Delhi");
-
+        });
+        step("Проверяем заполненную форму", () -> {
+            practiceFormPage.checkResult("Student Name", "Anastasiia Kenzina")
+                    .checkResult("Student Email", "kenzina.aa@yandex.ru")
+                    .checkResult("Gender", "Female")
+                    .checkResult("Mobile", "9025111826")
+                    .checkResult("Date of Birth", "18 October,1994")
+                    .checkResult("Subjects", "Math")
+                    .checkResult("Hobbies", "Sports")
+                    .checkResult("Picture", "photo.jpg")
+                    .checkResult("Address", "Some address 1")
+                    .checkResult("State and City", "NCR Delhi");
+        });
     }
 
     @Test
     void practiceFormMinFields() {
-        practiceFormPage.openPage()
-                .removeBanners()
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
+        step("Открываем форму регистрации", () -> {
+            practiceFormPage.openPage();
+        });
+
+        step("Заполняем обязательные поля формы регистрации и отправляем", () -> {
+            practiceFormPage.removeBanners()
                 .setFirstName("Anastasiia")
                 .setLastName("Kenzina")
                 .setGender("Female")
                 .setUserNumber("9025111826")
                 .submitForm();
-        practiceFormPage.checkResult("Student Name", "Anastasiia Kenzina")
-                .checkResult("Gender", "Female")
-                .checkResult("Mobile", "9025111826");
-
+        });
+        step("Проверяем заполненную форму", () -> {
+            practiceFormPage.checkResult("Student Name", "Anastasiia Kenzina")
+                    .checkResult("Gender", "Female")
+                    .checkResult("Mobile", "9025111826");
+        });
     }
 
     @Test
     void practiceFormFailedTest() {
-        practiceFormPage.openPage()
-                .removeBanners()
-                .setFirstName("Anastasiia")
-                .setLastName("Kenzina")
-                .setUserNumber("9025111826")
-                .submitForm();
-        practiceFormPage.checkResultForNegative("Student Name")
-                .checkResultForNegative("Mobile");
+        SelenideLogger.addListener("allure", new AllureSelenide());
 
+        step("Открываем форму регистрации", () -> {
+            practiceFormPage.openPage();
+        });
+
+        step("Заполняем не все обязательные поля формы регистрации и пытаемся отправить", () -> {
+                    practiceFormPage.removeBanners()
+                            .setFirstName("Anastasiia")
+                            .setLastName("Kenzina")
+                            .setUserNumber("9025111826")
+                            .submitForm();
+        });
+
+        step("Проверяем, что данные не отправились и окно с заполненной формой не появилось", () -> {
+            practiceFormPage.checkResultForNegative("Student Name")
+                    .checkResultForNegative("Mobile");
+        });
     }
-
 }
