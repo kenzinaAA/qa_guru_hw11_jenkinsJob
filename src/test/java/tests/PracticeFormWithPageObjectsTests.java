@@ -1,9 +1,8 @@
 package tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
@@ -13,18 +12,9 @@ import static io.qameta.allure.Allure.step;
 public class PracticeFormWithPageObjectsTests extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
-
-    @AfterEach
-    void addAttachmets () {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
-    }
-
     @Test
+    @DisplayName("Проверка заполнения всех полей")
     void practiceFormAllFields() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
         step("Открываем форму регистрации", () -> {
             practiceFormPage.openPage();
         });
@@ -61,9 +51,8 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Проверка заполнения только обязательных полей")
     void practiceFormMinFields() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         step("Открываем форму регистрации", () -> {
             practiceFormPage.openPage();
         });
@@ -84,9 +73,8 @@ public class PracticeFormWithPageObjectsTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Проверка заполнения не всех обязательных полей")
     void practiceFormFailedTest() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         step("Открываем форму регистрации", () -> {
             practiceFormPage.openPage();
         });
