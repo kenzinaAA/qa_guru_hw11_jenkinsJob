@@ -39,7 +39,7 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.withType(Test) {
     useJUnitPlatform()
-
+    systemProperties(System.getProperties())
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
@@ -48,8 +48,8 @@ tasks.withType(Test) {
     }
 }
 
-tasks.register('demoqa_test', Test) {
+task properties_test(type: Test) {
     useJUnitPlatform {
-        includeTags("demoqa")
+        includeTags("properties")
     }
 }
