@@ -19,10 +19,10 @@ public class TestBase {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
-        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-        Configuration.remote = "https://user1:1234@" + System.getProperty("selenoid_url") + "/wd/hub";
+        Configuration.browser = System.getProperty("BROWSER", "chrome");
+        Configuration.browserVersion = System.getProperty("BROWSER_VERSION", "127.0");
+        Configuration.browserSize = System.getProperty("BROWSER_SIZE", "1920x1080");
+        Configuration.remote = "https://user1:1234@" + System.getProperty("REMOTE", "selenoid.autotests.cloud") + "/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
