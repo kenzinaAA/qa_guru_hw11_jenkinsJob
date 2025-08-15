@@ -3,7 +3,7 @@
     "project": "qa_guru_hw11_jenkinsJob",
     "environment": "some env",
     "comment": "run results",
-    "reportLink": "https://jenkins.autotests.cloud/job/kenzinaAA-qa_guru_36_PracticeFormWithPageObjectsTests_jenkinsJob/14/",
+    "reportLink": "https://jenkins.autotests.cloud/job/kenzinaAA-qa_guru_36_PracticeFormWithPageObjectsTests_jenkinsJob/",
     "language": "ru",
     "allureFolder": "C:\\qa_guru_hw11_jenkinsJob\\build\\reports\\allure-report",
     "enableChart": true
